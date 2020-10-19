@@ -1,1 +1,22 @@
-<p>preguntas works!</p>
+
+    <form (ngSubmit)="onSubmit()" class="col-lg-10">
+
+      <div class="form-group">
+        <label>Pregunta</label>
+        <input type="email" class="form-control" id="IdPregunta" aria-describedby="emailHelp" placeholder="Pregunta" name="name" #name="ngModel" [(ngModel)]="preguntas.question">
+        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+      </div>
+  
+      <div class="form-group">
+          <label>Palabras Claves</label>
+          <input type="text" class="form-control" id="IdPalaClav" aria-describedby="emailHelp" placeholder="Palabras Claves" name="name" #name="ngModel" [(ngModel)]="preguntas.simple_question">
+          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+      </div>
+      <div class="form-group">
+          <label>Respuestas</label>
+          <input type="text" class="form-control" id="IdRespuestas" aria-describedby="emailHelp" placeholder="Respuestas" name="name" #name="ngModel" [(ngModel)]="preguntas.answer">
+          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+      </div>
+      <button type="submit" class="btn btn-primary">Crear</button> 
+    </form>
+  

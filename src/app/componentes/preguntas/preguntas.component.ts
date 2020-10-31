@@ -23,6 +23,7 @@ export class PreguntasComponent implements OnInit {
     this.title = "preguntas";
     this.preguntas = new Preguntas
       ( 
+        0,
         "",
         "",
         ""

@@ -3,14 +3,19 @@ import { data } from './datasource';
 import { DialogEditEventArgs, SaveEventArgs, EditSettingsModel, ToolbarItems } from '@syncfusion/ej2-angular-grids';
 import { DataUtil } from '@syncfusion/ej2-data';
 import { FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute, Params, provideRoutes } from '@angular/router';
+import { MensajesBot } from '../../models/mensajesbot';
+import { MensajesbotService } from '../../Services/mensajebot.service';
 
 @Component({
   selector: 'app-mensajebot',
   templateUrl: './mensajebot.component.html',
-  styleUrls: ['./mensajebot.component.css']
+  styleUrls: ['./mensajebot.component.css'],
+  providers: [MensajesbotService]
 })
 export class MensajebotComponent implements OnInit {
 
+  public title: string;
   public data: object[];
   public editSettings: EditSettingsModel;
   public toolbar: ToolbarItems[];
@@ -18,10 +23,21 @@ export class MensajebotComponent implements OnInit {
   @ViewChild('orderForm') public orderForm: FormGroup;
   public shipCityDistinctData: object[];
   public shipCountryDistinctData: object[];
-  
-  constructor() { }
+  public mensajesBot: MensajesBot;
+
+
+   constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _MensajesbotService: MensajesbotService
+  ) {
+    this.title = 'Mensajes ChatBot UD';
+    this.mensajesBot = new MensajesBot(0, '', '', '','','', '');
+  }
+
 
   ngOnInit(): void {
+    this.actualPage();
     this.data = data;
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
     this.toolbar = ['Add', 'Edit', 'Delete'];
@@ -52,6 +68,19 @@ export class MensajebotComponent implements OnInit {
             (args.form.elements.namedItem('CustomerID') as HTMLInputElement).focus();
         }
     }
+  }
+
+  actualPage() {
+
+    this._MensajesbotService.get().subscribe(
+      (response) => {
+        this.mensajesBot = response;
+        console.log(this.mensajesBot);
+      },
+      (error) => {
+        console.log(<any>error);
+      }
+    );
   }
 }
 

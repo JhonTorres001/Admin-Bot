@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 
 @Injectable()
-export class PreguntasService {
+export class MensajesbotService {
   public url: string;
 
   constructor(public _http: HttpClient) {
@@ -16,7 +16,7 @@ export class PreguntasService {
   get(): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-    return this._http.get("http://127.0.0.1:5000/api/v1/logger", { headers: headers });
+    return this._http.get("http://3.236.231.185:8080/api/v1/logger", { headers: headers });
   }
 
 }

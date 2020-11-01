@@ -21,6 +21,7 @@ import { GridModule, FilterService, PageService, GroupService} from '@syncfusion
 
 import { EditService, ToolbarService, SortService } from '@syncfusion/ej2-angular-grids';
 import { MensajebotComponent } from './componentes/mensajebot/mensajebot.component';
+import { LoginComponent } from './componentes/login/login.component';
 
 
 
@@ -33,7 +34,8 @@ import { MensajebotComponent } from './componentes/mensajebot/mensajebot.compone
     ContactoComponent,
     PreguntasComponent,
     MetricasComponent,
-    MensajebotComponent 
+    MensajebotComponent,
+    LoginComponent 
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,12 @@ import {
 } from '@syncfusion/ej2-angular-grids';
 import { Tooltip } from '@syncfusion/ej2-popups';
 
+
+import { DialogEditEventArgs } from '@syncfusion/ej2-angular-grids';
+import { DataUtil } from '@syncfusion/ej2-data';
+import { FormGroup } from '@angular/forms';
+
+
 @Component({
   selector: 'app-contacto',
   templateUrl: './pregunta.component.html',
@@ -26,6 +32,8 @@ export class ContactoComponent implements OnInit {
   public toolbar: ToolbarItems[];
   public orderData: object;
   public estado: string;
+  public shipCityDistinctData: object[];
+  public shipCountryDistinctData: object[];
 
   @ViewChild('grid') public Grid: GridComponent;
 
@@ -44,9 +52,11 @@ export class ContactoComponent implements OnInit {
       allowEditing: true,
       allowAdding: true,
       allowDeleting: true,
-      mode: 'Normal',
+      mode: 'Dialog',
     };
     this.toolbar = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
+    this.shipCityDistinctData = DataUtil.distinct(Object.values(this.preguntas) , 'ShipCity', true);
+    this.shipCountryDistinctData = DataUtil.distinct(Object.values(this.preguntas)  , 'ShipCountry', true );
   }
 
   load() {
@@ -55,6 +65,16 @@ export class ContactoComponent implements OnInit {
     const pageSize: number = this.Grid.pageSettings.pageSize; // initial page size
     const pageResize: any = (gridHeight - pageSize * rowHeight) / rowHeight; // new page size is obtained here
     this.Grid.pageSettings.pageSize = pageSize + Math.round(pageResize);
+  }
+
+  actionComplete(args: DialogEditEventArgs): void {
+    if ((args.requestType === 'beginEdit' || args.requestType === 'add')) {
+        args.form.ej2_instances[0].rules = {};
+        // Set initail Focus
+        if (args.requestType === 'beginEdit') {
+            // (args.form.elements.namedItem('CustomerID') as HTMLInputElement).focus();
+        }
+    }
   }
 
   actualPage() {

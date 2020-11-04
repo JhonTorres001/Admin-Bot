@@ -16,7 +16,7 @@ export class MensajesbotService {
   get(): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-    return this._http.get("http://3.236.231.185:8080/api/v1/logger", { headers: headers });
+    return this._http.get("http://35.173.47.78:8080/api/v1/logger", { headers: headers });
   }
 
 }
